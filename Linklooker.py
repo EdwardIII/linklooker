@@ -3,7 +3,7 @@ from urllib2 import Request, urlopen
 class Linklooker:
     """ Glue class for the linklooker """
 
-    def __init(self, url):
+    def __init__(self, url):
         self.links = []
         self.links.append(link(url))
 

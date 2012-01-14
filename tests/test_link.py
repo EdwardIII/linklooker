@@ -1,5 +1,5 @@
 import unittest
-import Linklooker
+from Linklooker import Link
 
 class TestSequenceFunctions(unittest.TestCase):
     def setUp(self):
