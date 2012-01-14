@@ -1,6 +1,14 @@
 from urllib2 import Request, urlopen
 
-class link:
+class Linklooker:
+    """ Glue class for the linklooker """
+
+    def __init(self, url):
+        self.links = []
+        self.links.append(link(url))
+
+
+class Link:
     """ Represents a url as a link with a urllib resource """
 
     def __init__(self, url):
