@@ -1,15 +1,15 @@
 from urllib2 import Request, urlopen, HTTPError
 
 class Linklooker:
-    """ Glue class for the linklooker """
+    """ Takes an array of urls, produced a dictionary with their status"""
 
-    def __init__(self, url):
-        self.links = []
-        self.links.append(link(url))
+    def __init__(self, urls):
+        if(type(urls) != 'list'): raise Exception('ExpectedAListAndGotSomethingElse')
+        self.urls = urls
 
-    def get_status():
+    def get_status(self):
         """ Returns a dictionary containing { <domain>: <Good|Bad> } """
-        return
+        return map( lambda l: { l: l.is_success() }, self.links )
 
 
 class Link:
@@ -17,6 +17,9 @@ class Link:
 
     def __init__(self, url):
         self.url = url
+
+    def __str__(self):
+        return self.url
 
     def is_success(self):
         req = Request(self.url)
