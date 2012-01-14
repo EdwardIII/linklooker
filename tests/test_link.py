@@ -6,7 +6,7 @@ class TestSequenceFunctions(unittest.TestCase):
         self.link = link.link('http://google.com')
 
     def test_is_success(self):
-        self.assertEqual(self.link.is_success, 1)
+        self.assertEqual(self.link.is_success(), 1)
 
 if __name__ == '__main__':
     unittest.main()

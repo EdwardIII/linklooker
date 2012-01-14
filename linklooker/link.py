@@ -6,10 +6,10 @@ class link:
     def __init__(self, url):
         self.url = url
 
-    def is_success():
+    def is_success(self):
         req = Request(self.url)
         self.response = urlopen(req);
-        if(self.response == 200):
+        if(self.response.code == 200):
             return 1
         else:
             return 0
