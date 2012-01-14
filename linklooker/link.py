@@ -1,7 +1,7 @@
 from urllib2 import Request, urlopen
 
 class link:
-    """ Base class for the linklooker """
+    """ Represents a url as a link with a urllib resource """
 
     def __init__(self, url):
         self.url = url
