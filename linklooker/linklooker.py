@@ -1,4 +1,4 @@
-from urllib2 import Request, urlopen, HTTPError
+from urllib2 import Request, urlopen, HTTPError, URLError
 
 class Links:
     """ Takes an array of urls, produced a dictionary with their status"""
@@ -7,8 +7,8 @@ class Links:
         self.urls = urls
 
     def status_table(self):
-        """ Returns an array of dictonaries: [ { <domain>: <Good|Bad> } ] """
-        return map( lambda l: { l: l.is_success() }, self.urls )
+        """ Returns an array of dictonaries:  { <domain>: <True|False> }  """
+        return { l: Link(l).is_success() for l in self.urls }
 
 
 class Link:
@@ -25,7 +25,7 @@ class Link:
 
         try:
             self.response = urlopen(req);
-        except(HTTPError):
+        except(HTTPError, URLError):
             pass
 
 
