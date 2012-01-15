@@ -11,4 +11,4 @@ links = Links(
 links_table = links.status_table()
 for link in links_table.keys():
     status = 'Success' if links_table[link] == True else 'Failure'
-    print format(link).rjust(2) + ':', format(status).rjust(3)
+    print '{:<40} {:}'.format(link + ':', status);
