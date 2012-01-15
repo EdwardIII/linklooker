@@ -1,5 +1,6 @@
 from Linklooker.Linklooker import Links, Link
 
-looker = Links(["http://google.com"]) 
+links = Links(["http://google.com"]) 
 
-
+for link in links.status_table():
+    print link

@@ -1,13 +1,13 @@
 import unittest
-from Linklooker import Linklooker
+from linklooker import linklooker
 
 class TestSequenceFunctions(unittest.TestCase):
     def setUp(self):
-        self.looker = Linklooker(['http://google.com', 'http://not-a-real-domain-name.com'])
+        self.links = linklooker.Links(['http://google.com', 'http://not-a-real-domain-name.com'])
 
-    def test_get_status(self):
-        self.assertEqual(self.goodLink.is_success(), True)
-        self.assertEqual(self.badLink.is_success(), False)
+    def status_table(self):
+        expected = { 'http://google.com': 'Good', 'http://not-a-real-domain-name.com': 'Good' };
+        self.assertEqual(self.links.status_table, expected)
 
 if __name__ == '__main__':
     unittest.main()

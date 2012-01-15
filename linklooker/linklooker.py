@@ -1,15 +1,14 @@
 from urllib2 import Request, urlopen, HTTPError
 
-class Linklooker:
+class Links:
     """ Takes an array of urls, produced a dictionary with their status"""
 
     def __init__(self, urls):
-        if(type(urls) != 'list'): raise Exception('ExpectedAListAndGotSomethingElse')
         self.urls = urls
 
-    def get_status(self):
-        """ Returns a dictionary containing { <domain>: <Good|Bad> } """
-        return map( lambda l: { l: l.is_success() }, self.links )
+    def status_table(self):
+        """ Returns an array of dictonaries: [ { <domain>: <Good|Bad> } ] """
+        return map( lambda l: { l: l.is_success() }, self.urls )
 
 
 class Link:
