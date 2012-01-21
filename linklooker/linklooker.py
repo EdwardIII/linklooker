@@ -10,6 +10,28 @@ class Links:
         """ Returns an array of dictonaries:  { <domain>: <True|False> }  """
         return { l: Link(l).is_success() for l in self.urls }
 
+    def status_table_from_csv(self, filename):
+        """ 
+        Imports a CSV with this format: url, link to check this url actually contains. 
+        Returns a list of dictionaries, e.g.: [ { url: www.example.com, status: True, contains_link: True } ]
+        """
+
+        import csv
+        urls = csv.reader(open(filename))
+        status_table = []
+        for row in urls:
+            link = Link(row[0])
+            print link.contains_url(row[1])
+            new_row = { 
+                    'url': row[0], 
+                    'is_success': link.is_success(), 
+                    'contains_link': link.contains_url(row[1])
+                    }
+            status_table.append(new_row);
+
+        return status_table
+            
+
 
 class Link:
     """ Represents a url as a link with a urllib resource """
