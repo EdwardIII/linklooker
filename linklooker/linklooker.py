@@ -3,8 +3,8 @@ from urllib2 import Request, urlopen, HTTPError, URLError
 class Links:
     """ Takes an array of urls, produces a dictionary with their status"""
 
-    def __init__(self, urls):
-        self.urls = urls
+    def __init__(self, urls = None):
+        if urls: self.urls = urls
 
     def status_table(self):
         """ Returns an array of dictonaries:  { <domain>: <True|False> }  """
@@ -21,7 +21,6 @@ class Links:
         status_table = []
         for row in urls:
             link = Link(row[0])
-            print link.contains_url(row[1])
             new_row = { 
                     'url': row[0], 
                     'is_success': link.is_success(), 
