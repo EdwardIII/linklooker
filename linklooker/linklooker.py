@@ -1,4 +1,5 @@
 from urllib2 import Request, urlopen, HTTPError, URLError
+import csv
 
 class Links:
     """ Takes an array of urls, produces a dictionary with their status"""
@@ -12,11 +13,10 @@ class Links:
 
     def status_table_from_csv(self, filename):
         """ 
-        Imports a CSV with this format: url, link to check this url actually contains. 
+        Imports a CSV with this format: <url>,<link to check this url actually contains>
         Returns a list of dictionaries, e.g.: [ { url: www.example.com, status: True, contains_link: True } ]
         """
 
-        import csv
         urls = csv.reader(open(filename))
         status_table = []
         for row in urls:
@@ -29,7 +29,26 @@ class Links:
             status_table.append(new_row);
 
         return status_table
-            
+
+    def status_table_from_pagerank_csv(self, filename):
+        """
+        Imports CSV with this format: [ID],<URL to search>,<page rank to verify>,<search term in link>,<link destination>
+        Returns a list of dictionaries, e.g.: [ { url: www.example.com, status: True, contains_link: True, pagerank_verified: True } ]
+        """
+
+        urls = csv.reader(open(filename))
+        status_table = []
+        for row in urls:
+            link = Link(row[1])
+            new_row = { 
+                    'url': row[1], 
+                    'is_success': link.is_success(), 
+                    'contains_link': link.contains_url(row[1]),
+                    'pagerank_verified': link.has_pagerank(row[2])
+                    }
+            status_table.append(new_row);
+
+        return status_table
 
 
 class Link:
@@ -37,7 +56,7 @@ class Link:
 
     def __init__(self, url):
         self.url = url
-        
+        self.pagerank = None
 
     def __str__(self):
         return self.url
@@ -56,6 +75,17 @@ class Link:
             return True
         else:
             return False
+
+    def get_pagerank(self):
+        if self.pagerank is None:
+            from pagerank import getpagerank
+            self.pagerank = int(getpagerank(self.url).strip())
+            return self.pagerank
+        else:
+            return self.pagerank
+
+    def has_pagerank(self, rank):
+        return True if rank == self.get_pagerank() else False
 
     def contains_url(self, url):
         """ Does the page this link points to contain the url inputted? Returns a boolean """

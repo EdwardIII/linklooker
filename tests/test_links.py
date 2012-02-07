@@ -13,6 +13,10 @@ class TestSequenceFunctions(unittest.TestCase):
         expected = [ { 'url': 'http://edwardiii.co.uk/', 'is_success': True, 'contains_link': True } ]
         self.assertEqual(self.links.status_table_from_csv('tests/urls-to-test.csv'), expected);
         
+    def test_status_table_from_pagerank_csv(self):
+        expected = [ { 'url': 'http://www.naivasha2010.net/Cognitive_inertia.htm', 'is_success': True, 'contains_link': True, 'pagerank_verified': True } ]
+        self.assertEqual(self.links.status_table_from_pagerank_csv('tests/urls-with-pageranks.csv'), expected);
+        
 
 
 if __name__ == '__main__':
