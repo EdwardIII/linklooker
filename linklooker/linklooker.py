@@ -30,6 +30,12 @@ class Links:
 
         return status_table
 
+    def _csv_to_linkrows(filename):
+        urls = csv.reader(open(filename))
+        return map(lambda r: LinkRow(url=r[1], 
+                    claimed_pagerank=r[2], target_link=r[4]), urls)
+
+
     def status_table_from_pagerank_csv(self, filename):
         """
         Imports CSV with this format: [ID],<URL to search>,<page rank to verify>,<search term in link>,<link destination>
@@ -51,6 +57,15 @@ class Links:
 
         return status_table
 
+class LinkRow:
+    """
+    Represents a row as provided in a CSV file. 
+    Required named parameters: url=, claimed_pagerank=, target_link=
+    """
+    def __init__(**kwargs):
+        self.url = kwargs['url']
+        self.claimed_pagerank = kwargs['claimed_pagerank']
+        self.target_link = kwargs['target_link']
 
 class Link:
     """ Represents a url as a link """

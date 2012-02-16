@@ -18,6 +18,5 @@ class TestSequenceFunctions(unittest.TestCase):
         self.assertEqual(self.links.status_table_from_pagerank_csv('tests/urls-with-pageranks.csv'), expected);
         
 
-
 if __name__ == '__main__':
     unittest.main()
