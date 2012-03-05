@@ -51,6 +51,7 @@ class Links:
                     'is_success': link.is_success(), 
                     'contains_link': link.contains_url(row[4]),
                     'pagerank_verified': link.has_pagerank(row[2]),
+                    'proposed_pagerank': row[2],
                     'pagerank': link.get_pagerank()
                     }
             status_table.append(new_row);
@@ -98,7 +99,7 @@ class Link:
             try:
                 self.pagerank = int(getpagerank(self.url).strip())
             except ValueError:
-                self.pagerank = 0 #XXX: But could be any non-intable value being passed through 
+                self.pagerank = 0 #XXX: But could be any non-intable value being passed through, masking errors 
 
             return self.pagerank
         else:

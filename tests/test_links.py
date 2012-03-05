@@ -14,7 +14,7 @@ class TestSequenceFunctions(unittest.TestCase):
         self.assertEqual(self.links.status_table_from_csv('tests/urls-to-test.csv'), expected);
         
     def test_status_table_from_pagerank_csv(self):
-        expected = [ { 'url': 'http://www.naivasha2010.net/Cognitive_inertia.htm', 'is_success': True, 'contains_link': True, 'pagerank_verified': True } ]
+        expected = [ { 'url': 'http://www.naivasha2010.net/Cognitive_inertia.htm', 'is_success': True, 'contains_link': True, 'pagerank_verified': True, 'pagerank': 2, 'proposed_pagerank': '2' } ]
         self.assertEqual(self.links.status_table_from_pagerank_csv('tests/urls-with-pageranks.csv'), expected);
         
 
